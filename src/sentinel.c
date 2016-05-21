@@ -716,7 +716,7 @@ void sentinelRunPendingScripts(void) {
         } else {
             sentinel.running_scripts++;
             sj->pid = pid;
-            sentinelEvent(REDIS_DEBUG,"+script-child",NULL,"%ld",(long)pid);
+            sentinelEvent(REDIS_NOTICE,"+script-child",NULL,"%ld",(long)pid);
         }
     }
 }
@@ -750,7 +750,7 @@ void sentinelCollectTerminatedScripts(void) {
         sentinelScriptJob *sj;
 
         if (WIFSIGNALED(statloc)) bysignal = WTERMSIG(statloc);
-        sentinelEvent(REDIS_DEBUG,"-script-child",NULL,"%ld %d %d",
+        sentinelEvent(REDIS_NOTICE,"-script-child",NULL,"%ld %d %d",
             (long)pid, exitcode, bysignal);
 
         ln = sentinelGetScriptListNodeByPid(pid);
